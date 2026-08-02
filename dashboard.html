@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BNP Paribas Securities Corp - Dashboard</title>
+  <meta name="description" content="BNP Paribas Securities Corp Online Banking Dashboard.">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <meta name="theme-color" content="#0A0F1D">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/transfer.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+  <!-- Ambient Light Blobs -->
+  <div class="ambient-bg">
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+    <div class="ambient-blob blob-3"></div>
+  </div>
+
+  <!-- Disclaimer Banner -->
+
+
+  <div class="app-container">
+
+    <!-- Sidebar Navigation -->
+    <aside id="appSidebar" class="app-sidebar">
+      <div class="sidebar-header">
+        <a href="#" class="sidebar-logo" onclick="Dashboard.switchView('dashboard')"
+          style="display: flex; align-items: center; gap: 10px;">
+          <img src="assets/logo.png" alt="Logo"
+            style="height: 36px; width: 36px; border-radius: 8px; object-fit: cover; border: 1px solid var(--glass-border);">
+          <span class="sidebar-logo-text"
+            style="font-size: 0.90rem; font-weight: 800; letter-spacing: 0.5px; color: var(--text-primary);">BNP
+            PARIBAS</span>
+        </a>
+        <button class="sidebar-toggle-btn" onclick="Dashboard.toggleSidebar()" title="Toggle Sidebar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-menu-item active" data-view="dashboard">
+          <a href="#" onclick="Dashboard.switchView('dashboard')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+            </svg>
+            <span class="menu-label">Dashboard</span>
+          </a>
+        </li>
+        <li class="sidebar-menu-item" data-view="accounts">
+          <a href="#" onclick="Dashboard.switchView('accounts')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <path d="M3 21h18" />
+              <path d="M5 21V7l7-4 7 4v14" />
+              <path d="M9 10a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v11H9V10z" />
+            </svg>
+            <span class="menu-label">Accounts</span>
+          </a>
+        </li>
+        <li class="sidebar-menu-item" data-view="transfer">
+          <a href="#" onclick="Dashboard.switchView('transfer')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <line x1="17" y1="17" x2="7" y2="7" />
+              <polyline points="7 17 7 7 17 7" />
+              <line x1="7" y1="17" x2="17" y2="7" />
+            </svg>
+            <span class="menu-label">Transfer</span>
+          </a>
+        </li>
+        <li class="sidebar-menu-item" data-view="transactions">
+          <a href="#" onclick="Dashboard.switchView('transactions')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="1" x2="12" y2="23" />
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+            <span class="menu-label">Transactions</span>
+          </a>
+        </li>
+        <li class="sidebar-menu-item" data-view="cards">
+          <a href="#" onclick="Dashboard.switchView('cards')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+              <line x1="1" y1="10" x2="23" y2="10" />
+            </svg>
+            <span class="menu-label">Cards</span>
+          </a>
+        </li>
+        <li class="sidebar-menu-item" data-view="investments">
+          <a href="#" onclick="Dashboard.switchView('investments')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+              <polyline points="17 6 23 6 23 12" />
+            </svg>
+            <span class="menu-label">Investments</span>
+          </a>
+        </li>
+        <li class="sidebar-menu-item" data-view="disbursements">
+          <a href="#" onclick="Dashboard.switchView('disbursements')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <path d="M21 12V7H3v10h12" />
+              <path d="M18 15l3 3-3 3" />
+              <path d="M14 18h7" />
+            </svg>
+            <span class="menu-label">Disbursements</span>
+          </a>
+        </li>
+        <li class="sidebar-menu-item" data-view="statements">
+          <a href="#" onclick="Dashboard.switchView('statements')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+            </svg>
+            <span class="menu-label">Statements</span>
+          </a>
+        </li>
+        <li class="sidebar-menu-item" data-view="settings">
+          <a href="#" onclick="Dashboard.switchView('settings')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+            <span class="menu-label">Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <li class="sidebar-menu-item">
+          <a href="#" onclick="App.logout()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="#EF4444" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            <span class="menu-label" style="color: var(--accent-danger);">Logout</span>
+          </a>
+        </li>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+
+      <!-- Header Top Bar -->
+      <!-- Mobile Drawer Overlay Backdrop -->
+      <div id="mobileDrawerOverlay" class="mobile-drawer-overlay" onclick="Dashboard.closeMobileDrawer()"></div>
+
+      <header class="app-header">
+        <div class="header-left">
+          <!-- Mobile Hamburger Button (only visible on mobile) -->
+          <button id="mobileMenuBtn" class="mobile-hamburger-btn" onclick="Dashboard.toggleSidebar()" title="Open Menu"
+            aria-label="Open navigation menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+
+          <!-- Mobile Brand Logo (only visible on mobile, center of header) -->
+          <div class="mobile-header-brand" onclick="Dashboard.switchView('dashboard')">
+            <img src="assets/logo.png" alt="BNP Paribas"
+              style="height: 28px; width: 28px; border-radius: 6px; object-fit: cover;">
+            <span
+              style="font-size: 0.78rem; font-weight: 800; letter-spacing: 0.5px; color: var(--text-primary); line-height: 1.2;">BNP
+              PARIBAS<br><span
+                style="font-size: 0.65rem; font-weight: 500; color: var(--text-secondary); letter-spacing: 0;">Securities
+                Corp.</span></span>
+          </div>
+
+          <div class="header-search">
+            <div class="input-with-icon">
+              <span class="input-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+              </span>
+              <input type="text" id="globalSearchInput" class="form-control"
+                placeholder="Search accounts, transfers, reference #..." onkeyup="Dashboard.handleGlobalSearch(event)">
+            </div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Digital Clock -->
+          <div class="digital-clock-container">
+            <div id="digitalClockTime" class="digital-clock-time">14:45:00 PM</div>
+            <div id="digitalClockDate" class="digital-clock-date">Sunday, August 2, 2026</div>
+          </div>
+
+          <!-- Notification Bell -->
+          <div class="notif-wrapper">
+            <button class="btn-icon" onclick="Dashboard.toggleNotifications()" title="Notifications">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+              <div class="notif-badge"></div>
+            </button>
+
+            <div id="notifDropdown" class="notif-dropdown">
+              <div class="notif-header">
+                <h4 style="font-size: 0.95rem;">Notifications</h4>
+                <span class="badge badge-info">3 New</span>
+              </div>
+              <div id="notifList" class="notif-list"></div>
+            </div>
+          </div>
+
+          <!-- Theme Toggle -->
+          <button id="themeToggleBtn" class="btn-icon" onclick="UI.toggleTheme()" title="Toggle Dark/Light Mode">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+          </button>
+
+          <!-- User Profile -->
+          <div class="header-profile" onclick="Dashboard.switchView('settings')">
+            <img src="assets/avatar.svg" alt="David McKenzie" class="profile-avatar">
+            <div class="profile-info">
+              <span class="profile-name">David McKenzie</span>
+              <span class="profile-role">Premium Member</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content Body Views Hub -->
+      <div class="content-body">
+
+        <!-- ====================================================================
+             VIEW 1: DASHBOARD HOME
+             ==================================================================== -->
+        <section id="view-dashboard" class="view-section active">
+          <div class="dashboard-welcome-bar">
+            <div>
+              <h1 class="welcome-title">Good Morning, David McKenzie</h1>
+              <p class="welcome-subtitle">Welcome back to your BNP Paribas Securities Corp Banking Hub</p>
+            </div>
+            <div style="display: flex; gap: 12px;">
+              <button class="btn btn-primary" onclick="Dashboard.switchView('transfer')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <line x1="22" y1="2" x2="11" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+                <span>Make a Transfer</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Account Summary Cards Grid -->
+          <div class="account-cards-grid">
+            <!-- Checking Card -->
+            <div class="glass-card summary-card interactive">
+              <div class="card-top">
+                <span class="account-label">Checking Account</span>
+                <div class="card-icon-badge emerald">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="5" width="20" height="14" rx="2" />
+                    <line x1="2" y1="10" x2="22" y2="10" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <div id="checkingBalanceDisplay" class="account-balance-amount">$10,000,000.00</div>
+                <div class="account-subtext">
+                  <span class="pulse-active-dot"></span>
+                  <span>Account #: ********5625 • Status: <strong
+                      style="color:var(--accent-emerald)">Verified</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Savings Card -->
+            <div class="glass-card summary-card interactive">
+              <div class="card-top">
+                <span class="account-label">High-Yield Savings</span>
+                <div class="card-icon-badge">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M19 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z" />
+                    <path d="M12 9v6" />
+                    <path d="M9 12h6" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <div id="savingsBalanceDisplay" class="account-balance-amount">$2,500,000.00</div>
+                <div class="account-subtext">
+                  <span>APY: <strong style="color:var(--accent-blue)">4.85%</strong> • Account #: ********9012</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Investment Card -->
+            <div class="glass-card summary-card interactive" onclick="Dashboard.switchView('investments')">
+              <div class="card-top">
+                <span class="account-label">Investment Portfolio</span>
+                <div class="card-icon-badge gold">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                    <polyline points="17 6 23 6 23 12" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <div id="investmentBalanceDisplay" class="account-balance-amount">$4,850,000.00</div>
+                <div class="account-subtext">
+                  <span style="color: var(--accent-emerald); font-weight:700;">+0.71% (+$34,200)</span>
+                  <span>• BNP Paribas</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Credit Score Card -->
+            <div class="glass-card summary-card interactive">
+              <div class="card-top">
+                <span class="account-label">Credit Score</span>
+                <div class="card-icon-badge purple">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <div class="account-balance-amount" style="color: var(--accent-purple)">825</div>
+                <div class="account-subtext">
+                  <span>Rating: <strong style="color:var(--text-primary)">Excellent (Top 2%)</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Action Buttons Strip -->
+          <h3 style="margin-bottom: 16px; font-size: 1.1rem;">Quick Financial Services</h3>
+          <div class="quick-actions-grid">
+            <div class="action-card" onclick="Dashboard.switchView('transfer')">
+              <div class="action-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+              <span class="action-title">Send Wire / Transfer</span>
+            </div>
+            <div class="action-card" onclick="Dashboard.switchView('statements')">
+              <div class="action-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                </svg>
+              </div>
+              <span class="action-title">Download Statements</span>
+            </div>
+            <div class="action-card" onclick="Dashboard.switchView('cards')">
+              <div class="action-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <rect x="1" y="4" width="22" height="16" rx="2" />
+                  <line x1="1" y1="10" x2="23" y2="10" />
+                </svg>
+              </div>
+              <span class="action-title">Virtual Debit Card</span>
+            </div>
+            <div class="action-card" onclick="Dashboard.switchView('investments')">
+              <div class="action-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="20" x2="18" y2="10" />
+                  <line x1="12" y1="20" x2="12" y2="4" />
+                  <line x1="6" y1="20" x2="6" y2="14" />
+                </svg>
+              </div>
+              <span class="action-title">Investment Hub</span>
+            </div>
+          </div>
+
+          <!-- Main Split View Layout -->
+          <div class="dashboard-split-grid">
+            <!-- Left Side: Recent Transactions Table -->
+            <div class="glass-card">
+              <div class="card-top">
+                <h3>Recent Transactions</h3>
+                <button class="btn btn-secondary btn-sm" onclick="Dashboard.switchView('transactions')">View
+                  All</button>
+              </div>
+              <div class="table-responsive">
+                <table class="custom-table">
+                  <thead>
+                    <tr>
+                      <th>Ref #</th>
+                      <th>Beneficiary</th>
+                      <th>Amount</th>
+                      <th>Type</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recentTransactionsTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Right Side: Preloaded Beneficiary Widget -->
+            <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div class="card-top">
+                  <h3>Verified Beneficiary</h3>
+                  <span class="badge badge-success">Preloaded</span>
+                </div>
+
+                <div class="beneficiary-card-preset">
+                  <div class="beneficiary-info">
+                    <div class="beneficiary-avatar">DM</div>
+                    <div>
+                      <div style="font-weight: 700; color: var(--text-primary);">David McKenzie</div>
+                      <div style="font-size: 0.8rem; color: var(--text-muted);">BancFirst • Account ********5625</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  style="font-size: 0.85rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;">
+                  <div><strong>Routing Number:</strong> ********3632</div>
+                  <div><strong>Investment Bond:</strong> BNP Paribas Securities Corp.</div>
+                  <div><strong>Disbursement:</strong> Bank Transfer, Check</div>
+                </div>
+              </div>
+
+              <button class="btn btn-gold" style="width: 100%;" onclick="TransferWizard.startTransferWithPreset()">
+                <span>Quick Transfer to Beneficiary</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW: ACCOUNTS SECTION
+             ==================================================================== -->
+        <section id="view-accounts" class="view-section">
+          <div class="dashboard-welcome-bar">
+            <div>
+              <h2>Asset &amp; Account Portfolio</h2>
+              <p>Detailed overview of your holdings, rates, and historical sub-ledgers</p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="AccountsManager.showInternalTransferModal()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M17 3L21 7L17 11" />
+                <path d="M3 17L7 21L3 25" />
+                <path d="M21 7H9a5 5 0 0 0-5 5v3" />
+                <path d="M3 17h12a5 5 0 0 0 5-5V9" />
+              </svg>
+              <span>Internal Transfer</span>
+            </button>
+          </div>
+
+          <!-- Accounts Selection Row -->
+          <div class="account-cards-grid" style="margin-bottom: 28px;">
+            <!-- Checking card interactive -->
+            <div id="accCardChecking" class="glass-card summary-card interactive active-card"
+              onclick="AccountsManager.selectAccount('checking')">
+              <div class="card-top">
+                <span class="account-label">Premium Checking</span>
+                <div class="card-icon-badge emerald">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="5" width="20" height="14" rx="2" />
+                    <line x1="2" y1="10" x2="22" y2="10" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <div id="accCheckingBal" class="account-balance-amount">$10,000,000.00</div>
+                <div class="account-subtext">********5625 • Click to view ledger</div>
+              </div>
+            </div>
+
+            <!-- Savings card interactive -->
+            <div id="accCardSavings" class="glass-card summary-card interactive"
+              onclick="AccountsManager.selectAccount('savings')">
+              <div class="card-top">
+                <span class="account-label">High-Yield Savings</span>
+                <div class="card-icon-badge">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M19 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z" />
+                    <path d="M12 9v6" />
+                    <path d="M9 12h6" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <div id="accSavingsBal" class="account-balance-amount">$2,500,000.00</div>
+                <div class="account-subtext">********9012 • Click to view ledger</div>
+              </div>
+            </div>
+
+            <!-- Investment card interactive -->
+            <div id="accCardInvestment" class="glass-card summary-card interactive"
+              onclick="AccountsManager.selectAccount('investment')">
+              <div class="card-top">
+                <span class="account-label">Portfolio Investment</span>
+                <div class="card-icon-badge gold">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                    <polyline points="17 6 23 6 23 12" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <div id="accInvestmentBal" class="account-balance-amount">$4,850,000.00</div>
+                <div class="account-subtext">BNP Paribas • Click to view ledger</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Split Details and Ledger -->
+          <div class="dashboard-split-grid">
+            <!-- Left: Specific Account Details -->
+            <div class="glass-card">
+              <h3 id="accDetailsTitle" style="margin-bottom: 20px;">Account Specific Details</h3>
+              <div id="accDetailsContent">
+                <!-- Loaded dynamically by js/accounts.js -->
+              </div>
+            </div>
+
+            <!-- Right: Sub-Ledger list -->
+            <div class="glass-card" style="display: flex; flex-direction: column;">
+              <h3 style="margin-bottom: 16px;">Account Sub-Ledger</h3>
+              <div class="table-responsive" style="flex: 1; max-height: 380px; overflow-y: auto;">
+                <table class="custom-table">
+                  <thead>
+                    <tr>
+                      <th>Ref</th>
+                      <th>Method / Detail</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody id="accLedgerBody">
+                    <!-- Loaded dynamically by js/accounts.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 2: THREE-STAGE TRANSFER WIZARD
+             ==================================================================== -->
+        <section id="view-transfer" class="view-section">
+          <div style="text-align: center; margin-bottom: 32px;">
+            <h2>Secure Money Transfer Wizard</h2>
+            <p>Three-stage verification, encryption, and real-time ledger dispatch</p>
+          </div>
+
+          <!-- Stepper Timeline -->
+          <div class="stepper-container">
+            <div class="stepper-progress-line">
+              <div id="stepperProgressFill" class="stepper-progress-fill"></div>
+            </div>
+
+            <div id="stepIndicator1" class="stepper-step active">
+              <div class="step-circle">1</div>
+              <div class="step-label">Beneficiary</div>
+            </div>
+
+            <div id="stepIndicator2" class="stepper-step">
+              <div class="step-circle">2</div>
+              <div class="step-label">Details & Amount</div>
+            </div>
+
+            <div id="stepIndicator3" class="stepper-step">
+              <div class="step-circle">3</div>
+              <div class="step-label">Review & Confirm</div>
+            </div>
+          </div>
+
+          <!-- STAGE 1: BENEFICIARY VERIFICATION -->
+          <div id="transferStage1" class="transfer-stage-panel active">
+            <div class="glass-card">
+              <h3 style="margin-bottom: 20px;">Stage 1 – Beneficiary Verification</h3>
+
+              <div class="form-group">
+                <label class="form-label">Selected Beneficiary</label>
+                <select id="transferBeneficiarySelect" class="form-control"
+                  onchange="TransferWizard.onBeneficiaryChange()">
+                  <option value="preset">David McKenzie (BancFirst - ********5625)</option>
+                  <option value="custom">+ Add Custom Beneficiary</option>
+                </select>
+              </div>
+
+              <!-- Beneficiary Details Grid -->
+              <div id="beneficiaryDetailsFields" class="grid-2col-responsive" style="margin-bottom: 20px;">
+                <div class="form-group">
+                  <label class="form-label">Beneficiary Name</label>
+                  <input type="text" id="benName" class="form-control" value="David McKenzie" readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Bank Name</label>
+                  <input type="text" id="benBank" class="form-control" value="BancFirst" readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Account Number</label>
+                  <input type="text" id="benAccount" class="form-control" value="********5625" readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Routing Number</label>
+                  <input type="text" id="benRouting" class="form-control" value="********3632" readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Investment Bond</label>
+                  <input type="text" id="benBond" class="form-control" value="BNP Paribas Securities Corp." readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Disbursement Method</label>
+                  <select id="benMethod" class="form-control">
+                    <option value="Bank Transfer">Bank Transfer (Instant ACH/Wire)</option>
+                    <option value="Check">Cashier's Check Delivery</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Verification Terminal Output Console -->
+              <div id="verificationTerminal" class="terminal-console-box">
+                <div id="terminalLogContent"></div>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; margin-top: 24px;">
+                <button id="verifyBtn" class="btn btn-primary" onclick="TransferWizard.runVerificationStage1()">
+                  <span>Verify Beneficiary</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- STAGE 2: TRANSFER DETAILS & AMOUNT -->
+          <div id="transferStage2" class="transfer-stage-panel">
+            <div class="glass-card">
+              <h3 style="margin-bottom: 20px;">Stage 2 – Transfer Details</h3>
+
+              <!-- Live Balance Bar -->
+              <div class="balance-live-bar">
+                <div class="balance-item">
+                  <span class="label">Available Checking Balance</span>
+                  <span id="stage2AvailBalance" class="val">$10,000,000.00</span>
+                </div>
+                <div class="balance-item">
+                  <span class="label">Remaining Balance After Transfer</span>
+                  <span id="stage2RemainingBalance" class="val remaining">$10,000,000.00</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Transfer Amount ($ USD)</label>
+                <div class="input-with-icon">
+                  <span class="input-icon" style="font-weight: 700; color: var(--accent-emerald);">$</span>
+                  <input type="number" id="transferAmountInput" class="form-control" placeholder="e.g. 250000" min="1"
+                    step="0.01" oninput="TransferWizard.updateLiveCalculations()">
+                </div>
+              </div>
+
+              <div class="grid-2col-responsive">
+                <div class="form-group">
+                  <label class="form-label">Purpose of Transfer</label>
+                  <select id="transferPurposeSelect" class="form-control">
+                    <option value="Portfolio Realignment">Portfolio Realignment</option>
+                    <option value="Asset Allocation">Asset Allocation</option>
+                    <option value="Investment Disbursement">Investment Disbursement</option>
+                    <option value="Personal Savings">Personal Savings</option>
+                    <option value="Commercial Wire">Commercial Wire</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Auto-Generated Reference #</label>
+                  <input type="text" id="transferRefInput" class="form-control font-mono" readonly>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; margin-top: 24px;">
+                <button class="btn btn-secondary" onclick="TransferWizard.goToStage(1)">Back</button>
+                <button class="btn btn-primary" onclick="TransferWizard.proceedToStage3()">
+                  <span>Continue to Review</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- STAGE 3: REVIEW & CONFIRMATION -->
+          <div id="transferStage3" class="transfer-stage-panel">
+            <div class="glass-card">
+              <h3 style="margin-bottom: 20px;">Stage 3 – Transfer Review & Confirmation</h3>
+
+              <div class="review-summary-card">
+                <div class="review-row">
+                  <span class="review-key">Beneficiary Name</span>
+                  <span id="revBenName" class="review-val">David McKenzie</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-key">Receiving Bank</span>
+                  <span id="revBenBank" class="review-val">BancFirst</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-key">Account Number</span>
+                  <span id="revBenAccount" class="review-val font-mono">********5625</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-key">Routing Number</span>
+                  <span id="revBenRouting" class="review-val font-mono">********3632</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-key">Investment Bond</span>
+                  <span id="revBenBond" class="review-val">BNP Paribas Securities Corp.</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-key">Disbursement Method</span>
+                  <span id="revBenMethod" class="review-val">Bank Transfer</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-key">Purpose</span>
+                  <span id="revPurpose" class="review-val">Portfolio Realignment</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-key">Reference Number</span>
+                  <span id="revRef" class="review-val font-mono">TXN-849201</span>
+                </div>
+                <div class="review-row"
+                  style="margin-top: 10px; padding-top: 16px; border-top: 2px solid var(--accent-emerald);">
+                  <span class="review-key" style="font-size: 1.1rem; color: var(--text-primary);">Transfer Amount</span>
+                  <span id="revAmount" class="review-val amount-highlight">$250,000.00</span>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between;">
+                <button class="btn btn-secondary" onclick="TransferWizard.goToStage(2)">Edit Details</button>
+                <button id="confirmTransferBtn" class="btn btn-gold" onclick="TransferWizard.executeFinalTransfer()">
+                  <span>Authorize & Confirm Transfer</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TRANSFER SUCCESS PANEL (Hidden by default) -->
+          <div id="transferSuccessPanel" class="transfer-stage-panel">
+            <div class="glass-card transfer-success-box">
+              <div class="checkmark-wrapper">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                  <circle class="checkmark-circle" cx="26" cy="26" r="23" fill="none" />
+                  <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+              </div>
+
+              <h2>Transfer Submitted Successfully</h2>
+              <p style="margin-top: 8px;">Your funds have been encrypted and dispatched via the banking network.</p>
+
+              <div id="successRefBadge" class="success-ref-pill">TXN-849201</div>
+
+              <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+                <button class="btn btn-primary" onclick="ReceiptManager.showCurrentReceiptModal()">View Receipt</button>
+                <button class="btn btn-secondary" onclick="ReceiptManager.downloadCurrentReceiptHTML()">Download
+                  Receipt</button>
+                <button class="btn btn-secondary" onclick="ReceiptManager.printCurrentReceipt()">Print Receipt</button>
+                <button class="btn btn-gold" onclick="Dashboard.switchView('dashboard')">Return to Dashboard</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 3: TRANSACTIONS HISTORY
+             ==================================================================== -->
+        <section id="view-transactions" class="view-section">
+          <div class="dashboard-welcome-bar">
+            <div>
+              <h2>Transaction Ledger</h2>
+              <p>Complete record of historical transfers, deposits, and dividends</p>
+            </div>
+            <button class="btn btn-secondary" onclick="TransactionsManager.exportLedgerCSV()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <span>Export to CSV</span>
+            </button>
+          </div>
+
+          <div class="glass-card">
+            <!-- Filter Controls Bar -->
+            <div class="table-controls">
+              <div style="display: flex; gap: 12px; flex-wrap: wrap; flex: 1;">
+                <input type="text" id="txnSearchInput" class="form-control"
+                  placeholder="Search reference # or beneficiary..." style="max-width: 280px;"
+                  onkeyup="TransactionsManager.render()">
+                <select id="txnTypeFilter" class="form-control" style="max-width: 160px;"
+                  onchange="TransactionsManager.render()">
+                  <option value="ALL">All Types</option>
+                  <option value="Transfer">Transfers</option>
+                  <option value="Deposit">Deposits</option>
+                  <option value="Wire Transfer">Wires</option>
+                  <option value="Dividend">Dividends</option>
+                  <option value="Card Purchase">Card Purchases</option>
+                </select>
+                <select id="txnStatusFilter" class="form-control" style="max-width: 160px;"
+                  onchange="TransactionsManager.render()">
+                  <option value="ALL">All Statuses</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Processing">Processing</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Full Ledger Table -->
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Ref Number</th>
+                    <th>Beneficiary</th>
+                    <th>Bank</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th>Status</th>
+                    <th>Date & Time</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="fullTransactionsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 4: INVESTMENT PORTFOLIO
+             ==================================================================== -->
+        <section id="view-investments" class="view-section">
+          <div class="dashboard-welcome-bar">
+            <div>
+              <h2>Investment Portfolio</h2>
+              <p>BNP Paribas Securities Corp. Wealth Management</p>
+            </div>
+          </div>
+
+          <div class="investment-hero-grid">
+            <!-- Canvas Growth Chart Card -->
+            <div class="glass-card">
+              <div class="card-top">
+                <div>
+                  <h3 style="font-size: 1.1rem;">Portfolio Growth Curve</h3>
+                  <div style="font-size: 0.8rem; color: var(--text-muted);">Historical YTD Return</div>
+                </div>
+                <div style="text-align: right;">
+                  <div
+                    style="font-family: var(--font-mono); font-size: 1.4rem; font-weight: 800; color: var(--accent-emerald);">
+                    +14.2% YTD</div>
+                  <div style="font-size: 0.8rem; color: var(--text-secondary);">+$601,400.00</div>
+                </div>
+              </div>
+
+              <!-- Interactive Line Canvas Chart -->
+              <div class="canvas-container">
+                <canvas id="growthChartCanvas"></canvas>
+              </div>
+            </div>
+
+            <!-- Asset Allocation Donut Canvas Chart Card -->
+            <div class="glass-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <h3>Asset Allocation</h3>
+                <div class="canvas-container" style="height: 200px; margin-top: 10px;">
+                  <canvas id="allocationChartCanvas"></canvas>
+                </div>
+              </div>
+              <div style="font-size: 0.85rem; display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; justify-content: space-between;">
+                  <span><strong style="color:#3B82F6">■</strong> US Sovereign Bonds</span>
+                  <span class="font-mono">40% ($1,940,000)</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span><strong style="color:#10B981">■</strong> BNP Securities Corp.</span>
+                  <span class="font-mono">35% ($1,697,500)</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span><strong style="color:#F59E0B">■</strong> Global Equities</span>
+                  <span class="font-mono">25% ($1,212,500)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 5: CARDS SECTION
+             ==================================================================== -->
+        <section id="view-cards" class="view-section">
+          <div class="dashboard-welcome-bar">
+            <div>
+              <h2>Virtual Premium Debit Card</h2>
+              <p>Manage physical and digital card parameters</p>
+            </div>
+          </div>
+
+          <div style="max-width: 500px; margin: 0 auto;">
+            <!-- 3D Card Flippable Component -->
+            <div id="debitCardContainer" class="card-flip-container" onclick="Dashboard.flipDebitCard()">
+              <div class="card-flip-inner">
+                <!-- Front Side -->
+                <div class="card-flip-front debit-card-visual">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 800; letter-spacing: 2px;">BNP PARIBAS SECURITIES CORP</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+                      <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+                      <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+                      <line x1="12" y1="20" x2="12.01" y2="20" />
+                    </svg>
+                  </div>
+                  <div class="card-chip"></div>
+                  <div id="displayCardNumber" class="card-number-display">4532 •••• •••• 5625</div>
+                  <div class="card-footer-info">
+                    <div>
+                      <div style="font-size: 0.65rem; opacity: 0.7;">CARD HOLDER</div>
+                      <div class="card-holder-name">DAVID MCKENZIE</div>
+                    </div>
+                    <div>
+                      <div style="font-size: 0.65rem; opacity: 0.7;">EXPIRES</div>
+                      <div class="card-expiry">08/29</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Back Side -->
+                <div class="card-flip-back debit-card-visual back">
+                  <div class="magnetic-strip"></div>
+                  <div style="margin-bottom: 20px;">
+                    <div style="font-size: 0.65rem; color: var(--text-muted); margin-bottom: 4px;">AUTHORIZED SIGNATURE
+                      & CVV</div>
+                    <div class="signature-strip">
+                      <span id="displayCVV">CVV: 882</span>
+                    </div>
+                  </div>
+                  <div style="font-size: 0.7rem; color: var(--text-muted);">
+                    Issued by Tunex Bank N.A. Customer Service +1 (800) 555-0199
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin: 16px 0 32px;">Click card
+              to flip</p>
+
+            <!-- Card Controls Form -->
+            <div class="glass-card">
+              <h3 style="margin-bottom: 20px;">Card Controls</h3>
+              <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <span>Freeze Card</span>
+                  <input type="checkbox" id="cardFreezeToggle" onchange="Dashboard.toggleCardFreeze()">
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <span>Show Full Card Number</span>
+                  <input type="checkbox" id="cardUnmaskToggle" onchange="Dashboard.toggleCardMask()">
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <span>Contactless Payments</span>
+                  <input type="checkbox" id="cardContactlessToggle" checked>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW: DISBURSEMENTS
+             ==================================================================== -->
+        <section id="view-disbursements" class="view-section">
+          <div class="dashboard-welcome-bar">
+            <div>
+              <h2>Disbursement Management</h2>
+              <p>Select your preferred payout disbursement method (Bank Transfer or Cashier's Check)</p>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               TAX & COMPLIANCE STATUS PANEL (from screenshot)
+               ============================================================ -->
+          <div class="glass-card compliance-status-panel" style="margin-bottom: 28px;">
+            <div class="compliance-header">
+              <div class="compliance-header-left">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+                <span>Tax &amp; Compliance Information</span>
+              </div>
+              <p class="compliance-subtext">Tax information allows our marketplace to accurately report and withhold
+                taxes on your product disbursements.</p>
+            </div>
+
+            <div class="compliance-grid">
+
+              <!-- Column 1: VAT/GST -->
+              <div class="compliance-item">
+                <div class="compliance-item-label">
+                  VAT / GST information
+                  <a href="#" class="compliance-info-link" onclick="DisbursementManager.showVATInfo(event)">Info</a>
+                </div>
+                <div class="compliance-status-row">
+                  <span class="compliance-check-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.5">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                  </span>
+                  <span class="compliance-status-text completed">Completed</span>
+                </div>
+                <a href="#" class="compliance-update-link" onclick="DisbursementManager.showVATInfo(event)">
+                  Update VAT/GST information
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </a>
+              </div>
+
+              <!-- Column 2: Tax Interview -->
+              <div class="compliance-item">
+                <div class="compliance-item-label">Tax interview status</div>
+                <div class="compliance-status-row">
+                  <span class="compliance-check-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.5">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                  </span>
+                  <span class="compliance-status-text completed">Completed</span>
+                </div>
+                <div class="compliance-doc-badge">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                  </svg>
+                  W-9 / W-8BEN · Certified
+                </div>
+              </div>
+
+              <!-- Column 3: DAC7 -->
+              <div class="compliance-item">
+                <div class="compliance-item-label">DAC7 questionnaire status</div>
+                <div class="compliance-status-row">
+                  <span class="compliance-check-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.5">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                  </span>
+                  <span class="compliance-status-text completed">Completed</span>
+                </div>
+              </div>
+
+              <!-- Column 4: Disbursement Status (highlighted green button) -->
+              <div class="compliance-item disbursement-status-col">
+                <button class="disbursement-status-badge" onclick="DisbursementManager.showDisbursementStatus()">
+                  Disbursement Status
+                </button>
+                <div class="compliance-status-row" style="margin-top: 10px;">
+                  <span class="compliance-pending-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                  </span>
+                  <span class="compliance-status-text pending">Initiated / pending...</span>
+                  <a href="#" class="compliance-external-icon"
+                    onclick="DisbursementManager.showDisbursementStatus(); return false;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- END TAX & COMPLIANCE STATUS PANEL -->
+
+          <div class="glass-card" style="max-width: 800px; margin: 0 auto;">
+            <h3 style="margin-bottom: 20px;">1. Choose Disbursement Method</h3>
+
+            <!-- Method Selector Cards Grid -->
+            <div
+              style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 28px;">
+              <!-- Option A: Bank Transfer -->
+              <div id="disburseMethodTransferCard" class="glass-card interactive"
+                style="border: 2px solid var(--accent-blue); background: rgba(59, 130, 246, 0.08); cursor: pointer;"
+                onclick="DisbursementManager.selectMethod('transfer')">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                  <div class="card-icon-badge emerald">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <line x1="17" y1="17" x2="7" y2="7" />
+                      <polyline points="7 17 7 7 17 7" />
+                      <line x1="7" y1="17" x2="17" y2="7" />
+                    </svg>
+                  </div>
+                  <input type="radio" name="disbursementMethodRadio" value="transfer" checked
+                    style="accent-color: var(--accent-blue); width: 20px; height: 20px;">
+                </div>
+                <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Bank Transfer (ACH / Wire)</h4>
+                <p style="font-size: 0.82rem; color: var(--text-secondary);">Direct instant electronic payout to your
+                  verified receiving bank account.</p>
+                <div style="margin-top: 12px; font-size: 0.78rem; color: var(--accent-emerald); font-weight: 700;">⚡
+                  Speed: Same-Day / Instant</div>
+              </div>
+
+              <!-- Option B: Cashier's Check -->
+              <div id="disburseMethodCheckCard" class="glass-card interactive"
+                style="border: 1px solid var(--card-border); cursor: pointer;"
+                onclick="DisbursementManager.selectMethod('check')">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                  <div class="card-icon-badge gold">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2">
+                      <rect x="2" y="6" width="20" height="12" rx="2" />
+                      <path d="M6 12h4" />
+                      <path d="M14 12h4" />
+                    </svg>
+                  </div>
+                  <input type="radio" name="disbursementMethodRadio" value="check"
+                    style="accent-color: var(--accent-gold); width: 20px; height: 20px;">
+                </div>
+                <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Official Cashier's Check</h4>
+                <p style="font-size: 0.82rem; color: var(--text-secondary);">Certified physical bank check dispatched
+                  via secure trackable courier delivery.</p>
+                <div style="margin-top: 12px; font-size: 0.78rem; color: var(--accent-gold); font-weight: 700;">📦
+                  Delivery: 1-3 Business Days</div>
+              </div>
+            </div>
+
+            <!-- Form Section -->
+            <h3 style="margin-bottom: 20px;">2. Disbursement Details</h3>
+
+            <!-- Dynamic Panel: Bank Transfer Fields -->
+            <div id="disburseTransferFields">
+              <div class="grid-2col-responsive">
+                <div class="form-group">
+                  <label class="form-label">Receiving Bank</label>
+                  <input type="text" id="disburseBank" class="form-control" value="BancFirst" readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Beneficiary Account</label>
+                  <input type="text" id="disburseAccount" class="form-control font-mono" value="********5625" readonly>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Routing Number</label>
+                <input type="text" id="disburseRouting" class="form-control font-mono" value="********3632" readonly>
+              </div>
+            </div>
+
+            <!-- Dynamic Panel: Cashier's Check Fields (Hidden by default) -->
+            <div id="disburseCheckFields" style="display: none;">
+              <div class="form-group">
+                <label class="form-label">Payee Full Name</label>
+                <input type="text" id="disbursePayeeName" class="form-control" value="David McKenzie">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Mailing Address</label>
+                <input type="text" id="disburseMailingAddress" class="form-control"
+                  value="742 Evergreen Terrace, New York, NY 10001">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Courier Delivery Service</label>
+                <select id="disburseCourier" class="form-control">
+                  <option value="FedEx Overnight Priority">FedEx Overnight Priority (Guaranteed Next Day)</option>
+                  <option value="UPS Express Saver">UPS Express Saver (2 Business Days)</option>
+                  <option value="USPS Certified Mail">USPS Certified Mail (Trackable Standard)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Common Amount & Ref Fields -->
+            <div class="grid-2col-responsive" style="margin-top: 16px;">
+              <div class="form-group">
+                <label class="form-label">Disbursement Amount ($ USD)</label>
+                <div class="input-with-icon">
+                  <span class="input-icon" style="font-weight: 700; color: var(--accent-emerald);">$</span>
+                  <input type="number" id="disburseAmountInput" class="form-control" placeholder="e.g. 500000" min="1"
+                    step="0.01" oninput="DisbursementManager.updateCalculations()">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Reference Number</label>
+                <input type="text" id="disburseRefInput" class="form-control font-mono" readonly>
+              </div>
+            </div>
+
+            <!-- Balance Summary Bar -->
+            <div class="balance-live-bar" style="margin: 20px 0;">
+              <div class="balance-item">
+                <span class="label">Available Checking Balance</span>
+                <span id="disburseAvailBal" class="val">$10,000,000.00</span>
+              </div>
+              <div class="balance-item">
+                <span class="label">Balance After Disbursement</span>
+                <span id="disburseRemBal" class="val remaining">$10,000,000.00</span>
+              </div>
+            </div>
+
+            <div style="text-align: right; margin-top: 24px;">
+              <button class="btn btn-gold" style="padding: 14px 28px;"
+                onclick="DisbursementManager.processDisbursement()">
+                <span>Process Disbursement</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 6: STATEMENTS
+             ==================================================================== -->
+        <section id="view-statements" class="view-section">
+          <div class="dashboard-welcome-bar">
+            <div>
+              <h2>Monthly Account Statements</h2>
+              <p>Generate certified financial ledger statements</p>
+            </div>
+          </div>
+
+          <div class="glass-card" style="margin-bottom: 24px;">
+            <div style="display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap;">
+              <div class="form-group" style="margin: 0; min-width: 180px;">
+                <label class="form-label">Select Month</label>
+                <select id="statementMonth" class="form-control">
+                  <option value="August 2026">August 2026</option>
+                  <option value="July 2026">July 2026</option>
+                  <option value="June 2026">June 2026</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" onclick="ReceiptManager.generateStatementView()">Generate
+                Statement</button>
+              <button class="btn btn-secondary" onclick="ReceiptManager.printCurrentStatement()">Print
+                Statement</button>
+            </div>
+          </div>
+
+          <!-- Statement Container Output -->
+          <div id="statementOutputContainer" class="glass-card" style="display: none;"></div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW 7: SETTINGS
+             ==================================================================== -->
+        <section id="view-settings" class="view-section">
+          <div class="dashboard-welcome-bar">
+            <div>
+              <h2>Account Settings</h2>
+              <p>Personal profile, security options, and preferences</p>
+            </div>
+          </div>
+
+          <div style="max-width: 700px;" class="glass-card">
+            <h3 style="margin-bottom: 20px;">Profile Information</h3>
+            <form onsubmit="Dashboard.saveProfileSettings(event)">
+              <div class="grid-2col-responsive">
+                <div class="form-group">
+                  <label class="form-label">Full Name</label>
+                  <input type="text" id="setFullName" class="form-control" value="David McKenzie">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Customer ID</label>
+                  <input type="text" class="form-control font-mono" value="BNK-8492041" readonly>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="setEmail" class="form-control" value="david.mckenzie@private.tunex.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="text" id="setPhone" class="form-control" value="+1 (555) 892-3401">
+              </div>
+
+              <div style="margin-top: 24px; text-align: right;">
+                <button type="submit" class="btn btn-primary">Save Profile Changes</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+
+
+  <!-- JavaScript Modules -->
+  <script src="js/storage.js"></script>
+  <script src="js/helpers.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/receipt.js"></script>
+  <script src="js/transactions.js"></script>
+  <script src="js/transfer.js"></script>
+  <script src="js/disbursements.js"></script>
+  <script src="js/accounts.js"></script>
+  <script src="js/dashboard.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Auto-authenticate session for seamless demo access
+      sessionStorage.setItem('tunex_authenticated', 'true');
+      if (!sessionStorage.getItem('tunex_active_user')) {
+        sessionStorage.setItem('tunex_active_user', 'david.mckenzie');
+      }
+      UI.init();
+      Dashboard.init();
+    });
+  </script>
+</body>
+
+</html>
