@@ -11,9 +11,9 @@ const DEFAULT_STATE = {
     accountType: 'Premium Checking',
     memberSince: 'Jan 2021',
     status: 'Verified',
-    email: 'david.mckenzie@private.tunex.com',
-    phone: '+1 (555) 892-3401',
-    address: '742 Evergreen Terrace, New York, NY 10001'
+    email: '******il53@yahoo.com',
+    phone: '***-***-7676',
+    address: '1211 N Villa Ave, Oklahoma City, OK 73107'
   },
   accounts: {
     checking: {
@@ -63,7 +63,7 @@ const DEFAULT_STATE = {
       amount: 150000.00,
       type: 'Transfer',
       method: 'Bank Transfer',
-      status: 'Completed',
+      status: 'Pending',
       date: '2026-08-01',
       time: '14:22:05',
       bond: 'BNP Paribas Securities Corp.',
